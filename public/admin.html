@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gym Slot Booking | Admin</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/sessions.html">Gym Slot Booking</a>
+    <nav>
+      <a href="/sessions.html">Sessions</a>
+      <a href="/bookings.html">My bookings</a>
+      <a href="/admin.html">Admin</a>
+      <button id="logoutBtn" class="link-button">Log out</button>
+    </nav>
+  </header>
+  <main class="container">
+    <section class="page-heading">
+      <p class="eyebrow">GYM OPERATIONS</p>
+      <h1>Admin Dashboard</h1>
+      <p class="muted">Create sessions, review bookings, and check members in.</p>
+    </section>
+    <div id="adminMessage" class="message" aria-live="polite" hidden></div>
+    <div class="admin-grid">
+      <section class="panel">
+        <h2>Create a session</h2>
+        <p class="muted">Sessions start on the hour and last one hour. Capacity is fixed at 20.</p>
+        <form id="createSessionForm">
+          <label for="startsAt">Date and start time</label>
+          <input id="startsAt" name="startsAt" type="datetime-local" step="3600" required>
+          <button type="submit">Create session</button>
+        </form>
+      </section>
+      <section class="panel">
+        <h2>Attendance check-in</h2>
+        <p class="muted">Enter a member's code during that session's hour. Codes work once.</p>
+        <form id="checkinForm">
+          <label for="checkinCode">Check-in code</label>
+          <input id="checkinCode" name="code" autocapitalize="characters" minlength="6" maxlength="12" required>
+          <button type="submit">Mark present</button>
+        </form>
+      </section>
+    </div>
+    <section class="section-gap">
+      <h2>Session bookings</h2>
+      <label for="adminSessionSelect">Choose session</label>
+      <select id="adminSessionSelect"></select>
+      <div id="adminBookings" class="stack section-gap"><p>Loading sessions…</p></div>
+    </section>
+  </main>
+  <footer>Admin access is protected by your account role.</footer>
+  <script src="/js/api.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>
