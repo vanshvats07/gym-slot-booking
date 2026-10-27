@@ -1,0 +1,23 @@
+{
+  "name": "gym-slot-booking",
+  "version": "1.0.0",
+  "description": "Gym session booking system with members, waitlist, and admin check-in",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "seed": "node scripts/seed.js",
+    "reset-admin-password": "node scripts/reset-admin-password.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^18.0.7",
+    "express": "^5.3.0",
+    "express-validator": "^7.3.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.11.1"
+  },
+  "devDependencies": { "nodemon": "^3.1.14" }
+}
