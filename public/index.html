@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gym Slot Booking | Sign in</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/index.html">Gym Slot Booking</a>
+    <span class="muted">Book your next workout with confidence.</span>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow">GYM SLOT BOOKING</p>
+      <h1>Book your next gym session.</h1>
+      <p class="muted">Reserve a spot, track your bookings, and join the waitlist when a session is full.</p>
+    </section>
+    <div id="authMessage" class="message" hidden aria-live="polite"></div>
+    <div class="auth-grid">
+      <section class="panel">
+        <h2>Welcome Back</h2>
+        <p class="muted">Sign in to manage your sessions.</p>
+        <form id="loginForm">
+          <label for="loginEmail">Email</label>
+          <input id="loginEmail" name="email" type="email" autocomplete="email" required>
+          <label for="loginPassword">Password</label>
+          <input id="loginPassword" name="password" type="password" autocomplete="current-password" required>
+          <button type="submit">Sign in</button>
+        </form>
+      </section>
+      <section class="panel">
+        <h2>Create Your Account</h2>
+        <p class="muted">New accounts are registered as members.</p>
+        <form id="registerForm">
+          <label for="registerName">Full name</label>
+          <input id="registerName" name="name" autocomplete="name" minlength="2" maxlength="80" required>
+          <label for="registerEmail">Email</label>
+          <input id="registerEmail" name="email" type="email" autocomplete="email" required>
+          <label for="registerPassword">Password (8+ characters)</label>
+          <input id="registerPassword" name="password" type="password" minlength="8" autocomplete="new-password" required>
+          <button type="submit" class="secondary">Register</button>
+        </form>
+      </section>
+    </div>
+  </main>
+  <footer>Gym Slot Booking</footer>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>
