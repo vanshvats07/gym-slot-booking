@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gym Slot Booking | My bookings</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/sessions.html">Gym Slot Booking</a>
+    <nav>
+      <a href="/sessions.html">Sessions</a>
+      <a href="/bookings.html">My bookings</a>
+      <a href="/admin.html" data-admin-only hidden>Admin</a>
+      <button id="logoutBtn" class="link-button">Log out</button>
+    </nav>
+  </header>
+  <main class="container">
+    <section class="page-heading">
+      <p class="eyebrow">YOUR SCHEDULE</p>
+      <h1>My bookings</h1>
+      <p class="muted">Your confirmed check-in codes and waitlist entries.</p>
+    </section>
+    <div id="bookingsMessage" class="message" aria-live="polite" hidden></div>
+    <h2>Bookings</h2>
+    <section id="bookingsList" class="stack"><p>Loading bookings…</p></section>
+    <h2 class="section-gap">Waitlist</h2>
+    <section id="waitlistList" class="stack"><p>Loading waitlist…</p></section>
+  </main>
+  <footer>You can cancel before the session starts.</footer>
+  <script src="/js/api.js"></script>
+  <script src="/js/bookings.js"></script>
+</body>
+</html>
