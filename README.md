@@ -39,6 +39,16 @@ npm run reset-admin-password
 
 The reset command only updates the password hash for that existing admin account. It requires a password of 8 to 72 bytes. Remove `ADMIN_RESET_PASSWORD` from `.env` after the command succeeds.
 
+## Run tests
+
+Run the test suite with Node.js's built-in test runner:
+
+```bash
+npm test
+```
+
+The current tests do not require a running MongoDB instance.
+
 ## Main pages
 
 - `/index.html` — login and registration
