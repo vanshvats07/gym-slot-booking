@@ -15,7 +15,8 @@
 2. The route runs the booking changes in a MongoDB transaction. It conditionally increments `bookedCount` only when a seat remains.
 3. If the session is full, the member is added to the waitlist instead.
 4. When a confirmed booking is cancelled, the transaction releases its seat and promotes the earliest eligible waitlisted member.
-5. The session's conditional update and the unique member/session indexes protect capacity and prevent duplicate active records during concurrent requests.
+5. Members can see their current waitlist position on the bookings page; the position is recalculated when their bookings are loaded.
+6. The session's conditional update and the unique member/session indexes protect capacity and prevent duplicate active records during concurrent requests.
 
 ## Authentication flow
 

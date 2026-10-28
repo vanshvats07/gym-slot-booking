@@ -5,6 +5,7 @@ A gym session booking app built with HTML, CSS, vanilla JavaScript, Node.js, Exp
 ## Features
 
 - Members can register, sign in, browse sessions, book or cancel, and join or leave a waitlist.
+- Members can see their current position in each waitlist from the bookings page.
 - Admins can create sessions, see their bookings and waitlists, and check members in.
 - Session times are entered and displayed in India Standard Time (IST).
 - A session has a capacity of 20. MongoDB transactions and a conditional database update protect that limit during simultaneous bookings.
@@ -65,6 +66,8 @@ The current tests do not require a running MongoDB instance.
 - `GET /api/bookings/my`, `POST /api/bookings/:sessionId`, `DELETE /api/bookings/:bookingId`
 - `DELETE /api/bookings/waitlist/:sessionId`
 - `POST /api/admin/checkin` (admin)
+
+`GET /api/bookings/my` includes a `position` on each active waitlist entry. The position is calculated when the response is requested and can change as members join or are promoted.
 
 The browser sends the HttpOnly login cookie automatically. API clients may instead send a bearer token in the request authorization header. API errors use JSON with `success: false` and a short message.
 
