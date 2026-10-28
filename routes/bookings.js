@@ -5,6 +5,7 @@ const Session = require("../models/Session");
 const Booking = require("../models/Booking");
 const Waitlist = require("../models/Waitlist");
 const { requireAuth } = require("../middleware/auth");
+const { createWaitlistPredecessorFilter } = require("../utils/waitlist-position");
 
 const router = express.Router();
 
@@ -60,12 +61,18 @@ router.get("/my", requireAuth, async (req, res, next) => {
     const bookings = await Booking.find({ member: req.user._id })
       .populate("session", "startsAt capacity bookedCount")
       .sort({ createdAt: -1 });
-    const waitlist = await Waitlist.find({
+    const waitlistEntries = await Waitlist.find({
       member: req.user._id,
       status: "waiting"
     })
       .populate("session", "startsAt capacity bookedCount")
       .sort({ joinedAt: -1 });
+    const waitlist = await Promise.all(waitlistEntries.map(async entry => ({
+      ...entry.toObject(),
+      position: 1 + await Waitlist.countDocuments(
+        createWaitlistPredecessorFilter(entry)
+      )
+    })));
 
     res.json({ success: true, bookings, waitlist });
   } catch (error) {
