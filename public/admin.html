@@ -26,7 +26,7 @@
     <div class="admin-grid">
       <section class="panel">
         <h2>Create a session</h2>
-        <p class="muted">Sessions start on the hour and last one hour. Capacity is fixed at 20.</p>
+        <p class="muted">Sessions use India Standard Time (IST), start on the hour, and last one hour. Capacity is fixed at 20.</p>
         <form id="createSessionForm">
           <label for="startsAt">Date and start time</label>
           <input id="startsAt" name="startsAt" type="datetime-local" step="3600" required>
@@ -52,6 +52,7 @@
   </main>
   <footer>Admin access is protected by your account role.</footer>
   <script src="/js/api.js"></script>
+  <script src="/js/session-time.js"></script>
   <script src="/js/admin.js"></script>
 </body>
 </html>

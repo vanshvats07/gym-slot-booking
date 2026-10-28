@@ -14,13 +14,6 @@ function escapeHtml(value) {
   }[character]));
 }
 
-function formatDate(date) {
-  return new Date(date).toLocaleString("en-IN", {
-    dateStyle: "medium",
-    timeStyle: "short"
-  });
-}
-
 function makeBookingCard(booking) {
   const canCancel = booking.status === "confirmed" &&
     new Date(booking.session.startsAt) > new Date();
@@ -39,7 +32,7 @@ function makeBookingCard(booking) {
   return `
     <article class="booking-card">
       <div>
-        <h3>${escapeHtml(formatDate(booking.session.startsAt))}</h3>
+        <h3>${escapeHtml(SessionTime.formatDate(booking.session.startsAt))}</h3>
         <p>Status: <strong>${escapeHtml(booking.status)}</strong></p>
         ${checkInCode}
       </div>
@@ -51,7 +44,7 @@ function makeWaitlistCard(entry) {
   return `
     <article class="booking-card">
       <div>
-        <h3>${escapeHtml(formatDate(entry.session.startsAt))}</h3>
+        <h3>${escapeHtml(SessionTime.formatDate(entry.session.startsAt))}</h3>
         <p>Status: Waiting for a seat</p>
       </div>
       <button class="secondary" data-leave="${entry.session._id}">Leave waitlist</button>

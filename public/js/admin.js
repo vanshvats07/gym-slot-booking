@@ -14,13 +14,6 @@ function escapeHtml(value) {
   }[character]));
 }
 
-function formatDate(date) {
-  return new Date(date).toLocaleString("en-IN", {
-    dateStyle: "medium",
-    timeStyle: "short"
-  });
-}
-
 async function loadSessions() {
   const data = await API.request("/api/sessions");
 
@@ -31,7 +24,7 @@ async function loadSessions() {
 
   sessionSelect.innerHTML = data.sessions.map(session => `
     <option value="${session._id}">
-      ${escapeHtml(formatDate(session.startsAt))} — ${session.bookedCount}/${session.capacity}
+      ${escapeHtml(SessionTime.formatDate(session.startsAt))} — ${session.bookedCount}/${session.capacity}
     </option>`
   ).join("");
 }
@@ -109,7 +102,9 @@ async function createSession(event) {
       throw new Error("Choose a date and start hour.");
     }
 
-    const startsAt = new Date(form.elements.startsAt.value).toISOString();
+    const startsAt = SessionTime
+      .fromIndiaLocalDateTime(form.elements.startsAt.value)
+      .toISOString();
     const result = await API.request("/api/sessions", {
       method: "POST",
       body: JSON.stringify({ startsAt })

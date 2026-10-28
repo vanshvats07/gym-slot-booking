@@ -6,6 +6,7 @@ A gym session booking app built with HTML, CSS, vanilla JavaScript, Node.js, Exp
 
 - Members can register, sign in, browse sessions, book or cancel, and join or leave a waitlist.
 - Admins can create sessions, see their bookings and waitlists, and check members in.
+- Session times are entered and displayed in India Standard Time (IST).
 - A session has a capacity of 20. MongoDB transactions and a conditional database update protect that limit during simultaneous bookings.
 - Passwords are hashed with bcryptjs. Login uses a signed JWT stored in a same-site, HttpOnly cookie.
 
