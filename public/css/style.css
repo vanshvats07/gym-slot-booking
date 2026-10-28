@@ -250,6 +250,11 @@ button:disabled {
   font-size: 0.92rem;
 }
 
+.booking-card .waitlist-position {
+  color: #286341;
+  font-weight: 650;
+}
+
 .empty {
   padding: 22px;
   color: #68746a;

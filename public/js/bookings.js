@@ -46,6 +46,7 @@ function makeWaitlistCard(entry) {
       <div>
         <h3>${escapeHtml(SessionTime.formatDate(entry.session.startsAt))}</h3>
         <p>Status: Waiting for a seat</p>
+        <p class="waitlist-position">Current position: ${escapeHtml(entry.position)}</p>
       </div>
       <button class="secondary" data-leave="${entry.session._id}">Leave waitlist</button>
     </article>`;
