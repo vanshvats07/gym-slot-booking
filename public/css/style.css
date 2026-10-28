@@ -1,7 +1,7 @@
 :root {
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #17211c;
-  background: #f6f7f4;
+  color: #202820;
+  background: #f7f8f6;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
@@ -18,7 +18,7 @@ body {
 }
 
 a {
-  color: inherit;
+  color: #286341;
 }
 
 .topbar {
@@ -26,90 +26,106 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  min-height: 68px;
-  padding: 14px max(22px, calc((100vw - 1080px) / 2));
+  min-height: 64px;
+  padding: 12px max(20px, calc((100vw - 960px) / 2));
   background: #fff;
-  border-bottom: 1px solid #e4e9e3;
+  border-bottom: 1px solid #e3e7e2;
 }
 
 .brand {
-  font-size: 1.3rem;
-  font-weight: 850;
-  letter-spacing: -0.04em;
+  color: #202820;
+  font-size: 1.1rem;
+  font-weight: 750;
+  letter-spacing: -0.035em;
   text-decoration: none;
 }
 
 .topbar nav {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
   flex-wrap: wrap;
 }
 
 .topbar nav a {
-  font-size: 0.92rem;
+  color: #4d594f;
+  font-size: 0.9rem;
   text-decoration: none;
+}
+
+.topbar nav a:hover,
+.topbar nav a[aria-current="page"] {
+  color: #286341;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .container {
   flex: 1;
-  width: min(100% - 32px, 1000px);
+  width: min(100% - 32px, 920px);
   margin: 0 auto;
-  padding: 34px 0 64px;
+  padding: 32px 0 56px;
 }
 
-.hero {
-  padding: 30px 0 20px;
-}
-
-.eyebrow {
-  color: #44835b;
-  font-size: 0.74rem;
-  font-weight: 800;
-  letter-spacing: 0.15em;
+.hero,
+.page-heading {
+  margin-bottom: 26px;
 }
 
 .hero h1,
 .page-heading h1 {
-  margin: 10px 0 15px;
-  font-size: clamp(2.1rem, 6vw, 3.6rem);
-  letter-spacing: -0.055em;
-  line-height: 1.06;
+  margin: 0 0 8px;
+  font-size: clamp(1.9rem, 5vw, 2.6rem);
+  letter-spacing: -0.05em;
+  line-height: 1.15;
 }
 
-.page-heading h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
+.hero .muted,
+.page-heading .muted {
+  margin: 0;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: #68746a;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
 }
 
 .muted {
-  color: #66736a;
-  line-height: 1.55;
+  color: #68746a;
+  line-height: 1.5;
 }
 
 .auth-grid,
 .admin-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  gap: 16px;
 }
 
 .panel {
-  padding: 24px;
+  padding: 20px;
   background: #fff;
-  border: 1px solid #e4e9e3;
-  border-radius: 18px;
-  box-shadow: 0 8px 30px #1d352008;
+  border: 1px solid #e3e7e2;
+  border-radius: 12px;
 }
 
 .panel h2 {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
+  font-size: 1.15rem;
+}
+
+.panel > .muted {
+  margin: 0;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 18px;
+  gap: 9px;
+  margin-top: 16px;
 }
 
 label {
@@ -121,37 +137,37 @@ label {
 input,
 select {
   width: 100%;
-  min-height: 44px;
-  padding: 10px 12px;
+  min-height: 42px;
+  padding: 9px 11px;
   color: inherit;
   font: inherit;
   background: #fff;
-  border: 1px solid #cfd8d0;
-  border-radius: 9px;
+  border: 1px solid #cbd3cb;
+  border-radius: 7px;
 }
 
 input:focus,
 select:focus,
 button:focus-visible,
 a:focus-visible {
-  outline: 3px solid #8ac59b;
+  outline: 3px solid #acd1b8;
   outline-offset: 2px;
 }
 
 button {
-  min-height: 44px;
-  padding: 10px 15px;
+  min-height: 42px;
+  padding: 9px 14px;
   color: #fff;
   font: inherit;
-  font-weight: 700;
-  background: #245b3a;
-  border: 0;
-  border-radius: 9px;
+  font-weight: 650;
+  background: #286341;
+  border: 1px solid #286341;
+  border-radius: 7px;
   cursor: pointer;
 }
 
 button:hover {
-  background: #19472c;
+  background: #204f34;
 }
 
 button:disabled {
@@ -160,22 +176,25 @@ button:disabled {
 }
 
 .secondary {
-  color: #1b4b2d;
-  background: #e6f0e7;
+  color: #286341;
+  background: #fff;
 }
 
 .secondary:hover {
-  background: #d6e8d9;
+  color: #204f34;
+  background: #f1f5f1;
 }
 
 .link-button {
   min-height: 36px;
   padding: 4px 0;
-  color: #245b3a;
+  color: #4d594f;
   background: transparent;
+  border: 0;
 }
 
 .link-button:hover {
+  color: #286341;
   background: transparent;
   text-decoration: underline;
 }
@@ -183,13 +202,13 @@ button:disabled {
 .toolbar {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
-  margin: 22px 0;
-  padding: 14px 16px;
+  margin: 20px 0;
+  padding: 12px 14px;
   background: #fff;
-  border: 1px solid #e4e9e3;
-  border-radius: 12px;
+  border: 1px solid #e3e7e2;
+  border-radius: 10px;
 }
 
 .toolbar input {
@@ -199,13 +218,12 @@ button:disabled {
 
 .text-link {
   margin-left: auto;
-  color: #245b3a;
-  font-weight: 700;
+  font-weight: 650;
 }
 
 .stack {
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
 .session-card,
@@ -213,39 +231,39 @@ button:disabled {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  padding: 18px;
+  gap: 16px;
+  padding: 16px;
   background: #fff;
-  border: 1px solid #e4e9e3;
-  border-radius: 14px;
+  border: 1px solid #e3e7e2;
+  border-radius: 10px;
 }
 
 .session-card h3,
 .booking-card h3 {
-  margin: 0 0 5px;
+  margin: 0 0 4px;
 }
 
 .session-card p,
 .booking-card p {
-  margin: 5px 0;
-  color: #66736a;
-  font-size: 0.94rem;
+  margin: 4px 0;
+  color: #68746a;
+  font-size: 0.92rem;
 }
 
 .empty {
-  padding: 26px;
-  color: #66736a;
+  padding: 22px;
+  color: #68746a;
   background: #fff;
-  border: 1px dashed #cfd8d0;
-  border-radius: 12px;
+  border: 1px solid #e3e7e2;
+  border-radius: 10px;
 }
 
 footer {
-  padding: 20px;
-  color: #718078;
+  padding: 16px;
+  color: #68746a;
   font-size: 0.85rem;
   text-align: center;
-  border-top: 1px solid #e4e9e3;
+  border-top: 1px solid #e3e7e2;
 }
 
 h2 {
@@ -253,35 +271,35 @@ h2 {
 }
 
 .section-gap {
-  margin-top: 30px;
+  margin-top: 26px;
 }
 
 .message {
-  margin: 14px 0;
-  padding: 12px 14px;
+  margin: 12px 0;
+  padding: 11px 13px;
   color: #344138;
-  background: #eef1ed;
-  border-radius: 10px;
+  background: #edf0ed;
+  border-radius: 7px;
 }
 
 .message.error {
-  color: #982d27;
+  color: #8c2824;
   background: #fff0ef;
 }
 
 .message.success {
   color: #205a31;
-  background: #eaf6ec;
+  background: #eaf5ec;
 }
 
 code {
-  padding: 4px 8px;
-  color: #1c5934;
-  font-size: 0.98rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  background: #edf5ed;
-  border-radius: 6px;
+  padding: 3px 7px;
+  color: #205a31;
+  font-size: 0.96rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  background: #edf3ee;
+  border-radius: 5px;
 }
 
 [hidden] {
@@ -292,16 +310,17 @@ code {
   .topbar {
     align-items: flex-start;
     flex-direction: column;
-    padding: 14px 18px;
+    gap: 8px;
+    padding: 12px 16px;
   }
 
   .topbar nav {
-    gap: 14px;
+    gap: 12px;
   }
 
   .container {
-    width: min(100% - 24px, 1000px);
-    padding-top: 22px;
+    width: min(100% - 24px, 920px);
+    padding-top: 24px;
   }
 
   .auth-grid,
@@ -310,7 +329,7 @@ code {
   }
 
   .panel {
-    padding: 19px;
+    padding: 17px;
   }
 
   .session-card,
