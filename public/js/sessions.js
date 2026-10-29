@@ -9,16 +9,6 @@ let isLoadingSessions = false;
 let reloadAfterCurrent = false;
 let refreshTimer;
 
-function escapeHtml(value) {
-  return String(value).replace(/[&<>"']/g, character => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  }[character]));
-}
-
 function makeSessionCard(session) {
   const isPast = new Date(session.startsAt) <= new Date();
   const buttonText = session.seatsRemaining > 0 ? "Book session" : "Join waitlist";
@@ -26,7 +16,7 @@ function makeSessionCard(session) {
   return `
     <article class="session-card">
       <div>
-        <h3>${escapeHtml(SessionTime.formatDate(session.startsAt))}</h3>
+        <h3>${Html.escape(SessionTime.formatDate(session.startsAt))}</h3>
         <p>${session.seatsRemaining} seats remaining · 1 hour · Capacity ${session.capacity}</p>
       </div>
       <button data-book="${session._id}" ${isPast ? "disabled" : ""}>${buttonText}</button>

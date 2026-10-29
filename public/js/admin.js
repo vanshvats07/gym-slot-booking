@@ -4,16 +4,6 @@ const message = document.querySelector("#adminMessage");
 const sessionSelect = document.querySelector("#adminSessionSelect");
 const bookingsList = document.querySelector("#adminBookings");
 
-function escapeHtml(value) {
-  return String(value).replace(/[&<>"']/g, character => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  }[character]));
-}
-
 async function loadSessions() {
   const data = await API.request("/api/sessions");
 
@@ -24,7 +14,7 @@ async function loadSessions() {
 
   sessionSelect.innerHTML = data.sessions.map(session => `
     <option value="${session._id}">
-      ${escapeHtml(SessionTime.formatDate(session.startsAt))} — ${session.bookedCount}/${session.capacity}
+      ${Html.escape(SessionTime.formatDate(session.startsAt))} — ${session.bookedCount}/${session.capacity}
     </option>`
   ).join("");
 }
@@ -36,8 +26,8 @@ function makeBookingRow(booking) {
   return `
     <article class="booking-card">
       <div>
-        <strong>${escapeHtml(name)}</strong>
-        <p>${escapeHtml(email)} · ${escapeHtml(booking.status)}</p>
+        <strong>${Html.escape(name)}</strong>
+        <p>${Html.escape(email)} · ${Html.escape(booking.status)}</p>
       </div>
     </article>`;
 }
@@ -49,8 +39,8 @@ function makeWaitlistRow(entry, position) {
   return `
     <article class="booking-card">
       <div>
-        <strong>${position}. ${escapeHtml(name)}</strong>
-        <p>${escapeHtml(email)}</p>
+        <strong>${position}. ${Html.escape(name)}</strong>
+        <p>${Html.escape(email)}</p>
       </div>
     </article>`;
 }

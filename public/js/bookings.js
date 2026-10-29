@@ -4,16 +4,6 @@ const bookingsList = document.querySelector("#bookingsList");
 const waitlistList = document.querySelector("#waitlistList");
 const message = document.querySelector("#bookingsMessage");
 
-function escapeHtml(value) {
-  return String(value).replace(/[&<>"']/g, character => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  }[character]));
-}
-
 function makeBookingCard(booking) {
   const canCancel = booking.status === "confirmed" &&
     new Date(booking.session.startsAt) > new Date();
@@ -21,7 +11,7 @@ function makeBookingCard(booking) {
 
   if (booking.status === "confirmed") {
     const code = booking.checkInCode || "Assigned at confirmation";
-    checkInCode = `<p>Check-in code: <code>${escapeHtml(code)}</code></p>`;
+    checkInCode = `<p>Check-in code: <code>${Html.escape(code)}</code></p>`;
   }
 
   let cancelButton = "";
@@ -32,8 +22,8 @@ function makeBookingCard(booking) {
   return `
     <article class="booking-card">
       <div>
-        <h3>${escapeHtml(SessionTime.formatDate(booking.session.startsAt))}</h3>
-        <p>Status: <strong>${escapeHtml(booking.status)}</strong></p>
+        <h3>${Html.escape(SessionTime.formatDate(booking.session.startsAt))}</h3>
+        <p>Status: <strong>${Html.escape(booking.status)}</strong></p>
         ${checkInCode}
       </div>
       ${cancelButton}
@@ -44,9 +34,9 @@ function makeWaitlistCard(entry) {
   return `
     <article class="booking-card">
       <div>
-        <h3>${escapeHtml(SessionTime.formatDate(entry.session.startsAt))}</h3>
+        <h3>${Html.escape(SessionTime.formatDate(entry.session.startsAt))}</h3>
         <p>Status: Waiting for a seat</p>
-        <p class="waitlist-position">Current position: ${escapeHtml(entry.position)}</p>
+        <p class="waitlist-position">Current position: ${Html.escape(entry.position)}</p>
       </div>
       <button class="secondary" data-leave="${entry.session._id}">Leave waitlist</button>
     </article>`;
