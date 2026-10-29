@@ -66,6 +66,9 @@ async function loadSessions() {
       ? `/api/sessions?date=${encodeURIComponent(date)}`
       : "/api/sessions";
     const data = await API.request(url);
+    if (message.classList.contains("error")) {
+      API.showMessage(message, "");
+    }
 
     if (data.sessions.length === 0) {
       sessionsList.innerHTML = '<div class="empty">No sessions for this date.</div>';
@@ -77,7 +80,15 @@ async function loadSessions() {
       button.addEventListener("click", () => bookSession(button));
     });
   } catch (error) {
-    sessionsList.innerHTML = "";
+    sessionsList.innerHTML = `
+      <div class="empty">
+        <p>Could not load sessions.</p>
+        <button id="retrySessionsBtn" type="button" class="secondary">Retry loading sessions</button>
+      </div>`;
+    sessionsList.querySelector("#retrySessionsBtn").addEventListener("click", () => {
+      API.showMessage(message, "");
+      loadSessions();
+    });
     API.showMessage(message, `${error.message} You can try again after checking your connection.`, "error");
   } finally {
     isLoadingSessions = false;
