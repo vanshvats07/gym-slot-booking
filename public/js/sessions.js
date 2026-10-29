@@ -5,6 +5,9 @@ const message = document.querySelector("#sessionMessage");
 const dateFilter = document.querySelector("#dateFilter");
 
 dateFilter.value = "";
+let isLoadingSessions = false;
+let reloadAfterCurrent = false;
+let refreshTimer;
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, character => ({
@@ -50,6 +53,11 @@ async function bookSession(button) {
 }
 
 async function loadSessions() {
+  if (isLoadingSessions) {
+    reloadAfterCurrent = true;
+    return;
+  }
+  isLoadingSessions = true;
   sessionsList.innerHTML = "<p>Loading sessions…</p>";
 
   try {
@@ -71,7 +79,23 @@ async function loadSessions() {
   } catch (error) {
     sessionsList.innerHTML = "";
     API.showMessage(message, `${error.message} You can try again after checking your connection.`, "error");
+  } finally {
+    isLoadingSessions = false;
+    if (reloadAfterCurrent) {
+      reloadAfterCurrent = false;
+      await loadSessions();
+    }
   }
+}
+
+function scheduleSessionRefresh() {
+  clearTimeout(refreshTimer);
+  if (document.hidden) return;
+
+  refreshTimer = setTimeout(async () => {
+    await loadSessions();
+    scheduleSessionRefresh();
+  }, 15000);
 }
 
 document.querySelector("#logoutBtn").addEventListener("click", API.logout);
@@ -80,6 +104,13 @@ dateFilter.addEventListener("change", () => {
   loadSessions();
 });
 
-loadSessions();
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    clearTimeout(refreshTimer);
+    return;
+  }
 
-setInterval(loadSessions, 15000);
+  loadSessions().finally(scheduleSessionRefresh);
+});
+
+loadSessions().finally(scheduleSessionRefresh);
