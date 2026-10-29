@@ -2,7 +2,8 @@
 
 ## Application structure
 
-- `server.js` configures Express, serves the static pages, mounts the API routes, and connects to MongoDB.
+- `app.js` configures Express, serves the static pages, and mounts the API routes. It exports the app for HTTP tests.
+- `server.js` validates runtime configuration, connects to MongoDB, and starts the HTTP server.
 - `routes/` contains the authentication, session, booking, and admin endpoints.
 - `middleware/auth.js` verifies the login token and enforces role-based access.
 - `models/` defines the Mongoose schemas and database indexes.
