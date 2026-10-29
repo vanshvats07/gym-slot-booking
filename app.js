@@ -74,9 +74,13 @@ app.use((error, req, res, next) => {
   });
 
   let message = "Internal server error";
-  if (status === 400) message = "Invalid request body";
-  if (status === 413) message = "Request body is too large";
-  if (status < 500) message = "Request failed";
+  if (status === 400) {
+    message = "Invalid request body";
+  } else if (status === 413) {
+    message = "Request body is too large";
+  } else if (status < 500) {
+    message = "Request failed";
+  }
 
   res.status(status).json({ success: false, message });
 });
