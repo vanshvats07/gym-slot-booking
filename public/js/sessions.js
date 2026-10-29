@@ -48,6 +48,7 @@ async function loadSessions() {
     return;
   }
   isLoadingSessions = true;
+  sessionsList.setAttribute("aria-busy", "true");
   sessionsList.innerHTML = "<p>Loading sessions…</p>";
 
   try {
@@ -82,6 +83,7 @@ async function loadSessions() {
     API.showMessage(message, `${error.message} You can try again after checking your connection.`, "error");
   } finally {
     isLoadingSessions = false;
+    sessionsList.setAttribute("aria-busy", "false");
     if (reloadAfterCurrent) {
       reloadAfterCurrent = false;
       await loadSessions();

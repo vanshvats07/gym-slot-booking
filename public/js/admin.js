@@ -5,18 +5,24 @@ const sessionSelect = document.querySelector("#adminSessionSelect");
 const bookingsList = document.querySelector("#adminBookings");
 
 async function loadSessions() {
-  const data = await API.request("/api/sessions");
+  sessionSelect.setAttribute("aria-busy", "true");
 
-  if (data.sessions.length === 0) {
-    sessionSelect.innerHTML = '<option value="">No sessions yet</option>';
-    return;
+  try {
+    const data = await API.request("/api/sessions");
+
+    if (data.sessions.length === 0) {
+      sessionSelect.innerHTML = '<option value="">No sessions yet</option>';
+      return;
+    }
+
+    sessionSelect.innerHTML = data.sessions.map(session => `
+      <option value="${session._id}">
+        ${Html.escape(SessionTime.formatDate(session.startsAt))} — ${session.bookedCount}/${session.capacity}
+      </option>`
+    ).join("");
+  } finally {
+    sessionSelect.setAttribute("aria-busy", "false");
   }
-
-  sessionSelect.innerHTML = data.sessions.map(session => `
-    <option value="${session._id}">
-      ${Html.escape(SessionTime.formatDate(session.startsAt))} — ${session.bookedCount}/${session.capacity}
-    </option>`
-  ).join("");
 }
 
 function makeBookingRow(booking) {
@@ -48,9 +54,11 @@ function makeWaitlistRow(entry, position) {
 async function showBookings() {
   if (!sessionSelect.value) {
     bookingsList.innerHTML = '<div class="empty">Create a session to see bookings.</div>';
+    bookingsList.setAttribute("aria-busy", "false");
     return;
   }
 
+  bookingsList.setAttribute("aria-busy", "true");
   bookingsList.innerHTML = "<p>Loading bookings…</p>";
 
   try {
@@ -78,6 +86,8 @@ async function showBookings() {
   } catch (error) {
     bookingsList.innerHTML = "";
     API.showMessage(message, error.message, "error");
+  } finally {
+    bookingsList.setAttribute("aria-busy", "false");
   }
 }
 
@@ -143,6 +153,8 @@ async function loadAdminDashboard() {
     await loadSessions();
     await showBookings();
   } catch (error) {
+    bookingsList.innerHTML = '<div class="empty">Could not load sessions.</div>';
+    bookingsList.setAttribute("aria-busy", "false");
     API.showMessage(message, error.message, "error");
   }
 }

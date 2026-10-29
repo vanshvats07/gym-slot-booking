@@ -73,6 +73,8 @@ async function leaveWaitlist(button) {
 }
 
 async function loadBookings() {
+  bookingsList.setAttribute("aria-busy", "true");
+  waitlistList.setAttribute("aria-busy", "true");
   bookingsList.innerHTML = "<p>Loading bookings…</p>";
 
   try {
@@ -116,6 +118,9 @@ async function loadBookings() {
       loadBookings();
     });
     API.showMessage(message, error.message, "error");
+  } finally {
+    bookingsList.setAttribute("aria-busy", "false");
+    waitlistList.setAttribute("aria-busy", "false");
   }
 }
 

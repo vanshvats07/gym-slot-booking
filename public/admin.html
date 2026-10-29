@@ -46,8 +46,8 @@
     <section class="section-gap">
       <h2>Session bookings</h2>
       <label for="adminSessionSelect">Choose session</label>
-      <select id="adminSessionSelect"></select>
-      <div id="adminBookings" class="stack section-gap"><p>Loading sessions…</p></div>
+      <select id="adminSessionSelect" aria-busy="true"></select>
+      <div id="adminBookings" class="stack section-gap" aria-live="polite" aria-busy="true"><p>Loading sessions…</p></div>
     </section>
   </main>
   <footer>Admin access is protected by your account role.</footer>
