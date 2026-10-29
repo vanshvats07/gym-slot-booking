@@ -47,6 +47,13 @@ router.post(
         });
       }
 
+      if (!booking.session || !booking.member) {
+        return res.status(404).json({
+          success: false,
+          message: "The session or member for this code no longer exists"
+        });
+      }
+
       const sessionStartsAt = booking.session.startsAt.getTime();
       const now = Date.now();
       const sessionEndsAt = sessionStartsAt + 60 * 60 * 1000;
