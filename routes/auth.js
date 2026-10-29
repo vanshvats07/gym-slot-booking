@@ -44,6 +44,9 @@ const validateEmail = body("email")
   .bail()
   .trim()
   .isEmail().withMessage("Enter a valid email")
+  .bail()
+  .isByteLength({ max: 254 })
+  .withMessage("Email must be no more than 254 bytes")
   .toLowerCase();
 
 const validatePassword = body("password")

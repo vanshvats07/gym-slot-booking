@@ -23,7 +23,7 @@
         <p class="muted">Continue to your sessions and bookings.</p>
         <form id="loginForm">
           <label for="loginEmail">Email</label>
-          <input id="loginEmail" name="email" type="email" autocomplete="email" required>
+          <input id="loginEmail" name="email" type="email" autocomplete="email" maxlength="254" required>
           <label for="loginPassword">Password</label>
           <input id="loginPassword" name="password" type="password" autocomplete="current-password" required>
           <button type="submit">Sign in</button>
@@ -36,7 +36,7 @@
           <label for="registerName">Full name</label>
           <input id="registerName" name="name" autocomplete="name" minlength="2" maxlength="80" required>
           <label for="registerEmail">Email</label>
-          <input id="registerEmail" name="email" type="email" autocomplete="email" required>
+          <input id="registerEmail" name="email" type="email" autocomplete="email" maxlength="254" required>
           <label for="registerPassword">Password (8+ characters)</label>
           <input id="registerPassword" name="password" type="password" minlength="8" autocomplete="new-password" required>
           <button type="submit" class="secondary">Register</button>
