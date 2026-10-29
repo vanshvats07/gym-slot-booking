@@ -61,6 +61,7 @@ The current tests do not require a running MongoDB instance.
 ## API overview
 
 - `POST /api/auth/register`, `POST /api/auth/login`, `POST /api/auth/logout`, `GET /api/auth/me`
+- `GET /api/health` (returns `503` when MongoDB is disconnected)
 - `GET /api/sessions?date=YYYY-MM-DD`, `POST /api/sessions` (admin)
 - `GET /api/sessions/:id/bookings` (admin)
 - `GET /api/bookings/my`, `POST /api/bookings/:sessionId`, `DELETE /api/bookings/:bookingId`

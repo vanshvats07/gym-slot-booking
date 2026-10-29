@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const mongoose = require("mongoose");
 const path = require("path");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/auth");
@@ -39,9 +40,14 @@ app.get("/admin.html", requireAuth, allowRoles("admin"), (req, res) => {
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/api/health", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Gym Slot Booking API is running"
+  const databaseConnected = mongoose.connection.readyState === 1;
+  const status = databaseConnected ? 200 : 503;
+
+  res.status(status).json({
+    success: databaseConnected,
+    message: databaseConnected
+      ? "Gym Slot Booking API is running"
+      : "Database unavailable"
   });
 });
 
