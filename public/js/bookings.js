@@ -115,8 +115,16 @@ async function loadBookings() {
       button.addEventListener("click", () => leaveWaitlist(button));
     });
   } catch (error) {
-    bookingsList.innerHTML = "";
-    waitlistList.innerHTML = "";
+    bookingsList.innerHTML = `
+      <div class="empty">
+        <p>Could not load your bookings.</p>
+        <button id="retryBookingsBtn" type="button" class="secondary">Retry loading bookings</button>
+      </div>`;
+    waitlistList.innerHTML = '<div class="empty">Waitlist data could not be loaded.</div>';
+    bookingsList.querySelector("#retryBookingsBtn").addEventListener("click", () => {
+      API.showMessage(message, "");
+      loadBookings();
+    });
     API.showMessage(message, error.message, "error");
   }
 }
