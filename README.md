@@ -31,6 +31,8 @@ A gym session booking app built with HTML, CSS, vanilla JavaScript, Node.js, Exp
 
 6. Open `http://localhost:5000`.
 
+The server closes its HTTP listener and MongoDB connection when it receives `SIGINT` or `SIGTERM`.
+
 The seed script creates `admin@gym.local` and `member@gym.local` with the passwords provided by `SEED_ADMIN_PASSWORD` and `SEED_MEMBER_PASSWORD`. It does not change existing passwords. It also creates sessions and extra test members. Extra test members receive random passwords that are not displayed.
 
 To reset the password for an existing `admin@gym.local` account, set `ADMIN_RESET_PASSWORD` to a private password in `.env` and run:

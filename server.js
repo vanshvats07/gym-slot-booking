@@ -99,9 +99,39 @@ async function startServer() {
     await connectDB();
 
     const port = process.env.PORT || 5000;
-    app.listen(port, () => {
+    const server = app.listen(port, () => {
       console.log(`Server running on http://localhost:${port}`);
     });
+    let shuttingDown = false;
+    const shutdown = signal => {
+      if (shuttingDown) return;
+      shuttingDown = true;
+      console.log(`Received ${signal}; shutting down.`);
+
+      server.close(async error => {
+        if (error) {
+          console.error("Failed to close HTTP server.", {
+            name: error?.name || "Error",
+            code: error?.code
+          });
+          process.exitCode = 1;
+        }
+
+        try {
+          await mongoose.disconnect();
+          console.log("MongoDB disconnected.");
+        } catch (disconnectError) {
+          console.error("Failed to disconnect MongoDB.", {
+            name: disconnectError?.name || "Error",
+            code: disconnectError?.code
+          });
+          process.exitCode = 1;
+        }
+      });
+    };
+
+    process.once("SIGINT", () => shutdown("SIGINT"));
+    process.once("SIGTERM", () => shutdown("SIGTERM"));
   } catch (error) {
     console.error("Failed to start server: database connection failed.", {
       name: error.name || "Error",
