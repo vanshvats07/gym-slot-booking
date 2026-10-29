@@ -51,10 +51,13 @@ const API = {
   },
 
   async request(url, options = {}) {
-    const headers = {
-      "Content-Type": "application/json",
-      ...(options.headers || {})
-    };
+    const headers = new Headers(options.headers || {});
+    if (!headers.has("Accept")) {
+      headers.set("Accept", "application/json");
+    }
+    if (options.body !== undefined && !headers.has("Content-Type")) {
+      headers.set("Content-Type", "application/json");
+    }
     let response;
 
     try {
