@@ -102,8 +102,11 @@ async function startServer() {
     app.listen(port, () => {
       console.log(`Server running on http://localhost:${port}`);
     });
-  } catch {
-    console.error("Failed to start server: database connection failed.");
+  } catch (error) {
+    console.error("Failed to start server: database connection failed.", {
+      name: error.name || "Error",
+      code: error.code
+    });
     process.exit(1);
   }
 }
