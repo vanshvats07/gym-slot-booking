@@ -92,7 +92,9 @@ async function loadBookings() {
       .sort((first, second) =>
         new Date(first.session.startsAt) - new Date(second.session.startsAt)
       );
-    const waitlist = data.waitlist.filter(entry => entry.session);
+    const waitlist = data.waitlist
+      .filter(entry => entry.session)
+      .sort((first, second) => first.position - second.position);
 
     if (bookings.length === 0) {
       bookingsList.innerHTML = '<div class="empty">You have no bookings yet.</div>';
