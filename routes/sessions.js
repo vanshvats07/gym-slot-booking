@@ -5,7 +5,11 @@ const Session = require("../models/Session");
 const Booking = require("../models/Booking");
 const Waitlist = require("../models/Waitlist");
 const { requireAuth, allowRoles } = require("../middleware/auth");
-const { startsOnIndiaHour, isRealCalendarDate } = require("../utils/session-time");
+const {
+  startsOnIndiaHour,
+  isRealCalendarDate,
+  hasExplicitTimezone
+} = require("../utils/session-time");
 
 const router = express.Router();
 
@@ -55,7 +59,14 @@ router.post(
   "/",
   requireAuth,
   allowRoles("admin"),
-  [body("startsAt").isISO8601().withMessage("Provide startsAt as an ISO date/time")],
+  [
+    body("startsAt")
+      .isISO8601({ strict: true, strictSeparator: true })
+      .withMessage("Provide startsAt as an ISO date/time")
+      .bail()
+      .custom(hasExplicitTimezone)
+      .withMessage("Provide a timezone for startsAt")
+  ],
   async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

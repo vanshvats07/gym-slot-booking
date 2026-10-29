@@ -22,4 +22,12 @@ function isRealCalendarDate(value) {
     date.toISOString().slice(0, 10) === value;
 }
 
-module.exports = { startsOnIndiaHour, isRealCalendarDate };
+function hasExplicitTimezone(value) {
+  return typeof value === "string" && /(?:Z|[+-]\d{2}:?\d{2})$/i.test(value);
+}
+
+module.exports = {
+  startsOnIndiaHour,
+  isRealCalendarDate,
+  hasExplicitTimezone
+};

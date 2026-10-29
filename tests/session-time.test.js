@@ -2,7 +2,8 @@ const assert = require("node:assert/strict");
 const test = require("node:test");
 const {
   startsOnIndiaHour,
-  isRealCalendarDate
+  isRealCalendarDate,
+  hasExplicitTimezone
 } = require("../utils/session-time");
 
 test("accepts session starts on the hour in India", () => {
@@ -30,4 +31,12 @@ test("rejects invalid or malformed calendar dates", () => {
   assert.equal(isRealCalendarDate("2026-13-01"), false);
   assert.equal(isRealCalendarDate("2026-1-01"), false);
   assert.equal(isRealCalendarDate(null), false);
+});
+
+test("requires an explicit timezone on session timestamps", () => {
+  assert.equal(hasExplicitTimezone("2026-10-27T08:00:00.000Z"), true);
+  assert.equal(hasExplicitTimezone("2026-10-27T08:00:00+05:30"), true);
+  assert.equal(hasExplicitTimezone("2026-10-27T08:00:00+0530"), true);
+  assert.equal(hasExplicitTimezone("2026-10-27T08:00:00"), false);
+  assert.equal(hasExplicitTimezone(null), false);
 });
