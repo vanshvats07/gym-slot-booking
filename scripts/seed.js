@@ -7,10 +7,7 @@ const connectDB = require("../config/db");
 const User = require("../models/User");
 const Session = require("../models/Session");
 const Booking = require("../models/Booking");
-
-function makeCheckInCode() {
-  return crypto.randomBytes(8).toString("base64url").slice(0, 8).toUpperCase();
-}
+const { createCheckInCode } = require("../utils/check-in-code");
 
 function getFutureIndiaTime(daysAhead, hour) {
   const todayInIndia = new Intl.DateTimeFormat("en-CA", {
@@ -108,7 +105,7 @@ async function addBookingIfThereIsRoom(member, session) {
 
       if (!availableSeat) return;
 
-      const checkInCode = makeCheckInCode();
+      const checkInCode = createCheckInCode();
       if (currentBooking) {
         currentBooking.status = "confirmed";
         currentBooking.checkInCode = checkInCode;

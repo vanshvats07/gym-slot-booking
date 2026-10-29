@@ -1,17 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const crypto = require("crypto");
 const Session = require("../models/Session");
 const Booking = require("../models/Booking");
 const Waitlist = require("../models/Waitlist");
 const { requireAuth } = require("../middleware/auth");
 const { createWaitlistPositionMap } = require("../utils/waitlist-position");
+const { createCheckInCode } = require("../utils/check-in-code");
 
 const router = express.Router();
-
-function createCheckInCode() {
-  return crypto.randomBytes(8).toString("base64url").slice(0, 8).toUpperCase();
-}
 
 function createRouteError(status, message) {
   const error = new Error(message);
