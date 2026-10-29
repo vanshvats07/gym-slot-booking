@@ -204,7 +204,7 @@ async function promoteNextMember(session, transaction) {
       session: session._id,
       status: "waiting"
     })
-      .sort({ joinedAt: 1 })
+      .sort({ joinedAt: 1, _id: 1 })
       .session(transaction);
 
     if (!entry) return null;
