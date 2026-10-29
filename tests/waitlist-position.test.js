@@ -1,30 +1,19 @@
 const assert = require("node:assert/strict");
 const test = require("node:test");
-const { createWaitlistPredecessorFilter } = require("../utils/waitlist-position");
+const { createWaitlistPositionMap } = require("../utils/waitlist-position");
 
-test("counts only waiting entries in the same session", () => {
-  const entry = {
-    _id: "entry-id",
-    session: { _id: "session-id" },
-    joinedAt: new Date("2026-10-28T12:00:00.000Z")
-  };
+test("assigns ordered positions independently for each session", () => {
+  const positions = createWaitlistPositionMap([
+    { _id: "first", session: "session-a" },
+    { _id: "second", session: { _id: "session-a" } },
+    { _id: "third", session: "session-a" },
+    { _id: "other-session", session: "session-b" }
+  ]);
 
-  assert.deepEqual(createWaitlistPredecessorFilter(entry), {
-    session: "session-id",
-    status: "waiting",
-    $or: [
-      { joinedAt: { $lt: entry.joinedAt } },
-      { joinedAt: entry.joinedAt, _id: { $lt: "entry-id" } }
-    ]
-  });
-});
-
-test("supports waitlist entries whose session is not populated", () => {
-  const entry = {
-    _id: "entry-id",
-    session: "session-id",
-    joinedAt: new Date("2026-10-28T12:00:00.000Z")
-  };
-
-  assert.equal(createWaitlistPredecessorFilter(entry).session, "session-id");
+  assert.deepEqual([...positions], [
+    ["first", 1],
+    ["second", 2],
+    ["third", 3],
+    ["other-session", 1]
+  ]);
 });
