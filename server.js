@@ -12,6 +12,10 @@ const { requireAuth, allowRoles } = require("./middleware/auth");
 const app = express();
 
 app.use(express.json({ limit: "100kb" }));
+app.use("/api", (req, res, next) => {
+  res.setHeader("Cache-Control", "no-store");
+  next();
+});
 
 app.get("/admin.html", requireAuth, allowRoles("admin"), (req, res) => {
   res.setHeader("Cache-Control", "no-store");
