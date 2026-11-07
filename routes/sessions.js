@@ -43,16 +43,16 @@ router.get("/", requireAuth, async (req, res, next) => {
       filter.startsAt = { $gte: new Date(Date.now() - 60 * 60 * 1000) };
     }
 
-    const sessions = await Session.find(filter).sort({ startsAt: 1 }).lean();
-    const sessionsWithSeats = sessions.map(session => ({
-      ...session,
-      seatsRemaining: Math.max(0, session.capacity - session.bookedCount)
-    }));
+  //   const sessions = await Session.find(filter).sort({ startsAt: 1 }).lean();
+  //   const sessionsWithSeats = sessions.map(session => ({
+  //     ...session,
+  //     seatsRemaining: Math.max(0, session.capacity - session.bookedCount)
+  //   }));
 
-    res.json({ success: true, sessions: sessionsWithSeats });
-  } catch (error) {
-    next(error);
-  }
+  //   res.json({ success: true, sessions: sessionsWithSeats });
+  // } catch (error) {
+  //   next(error);
+  // }
 });
 
 router.post(
