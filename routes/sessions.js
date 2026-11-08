@@ -53,19 +53,19 @@ router.get("/", requireAuth, async (req, res, next) => {
   // } catch (error) {
   //   next(error);
   // }
-});
+// });
 
-router.post(
-  "/",
-  requireAuth,
-  allowRoles("admin"),
-  [
-    body("startsAt")
-      .isISO8601({ strict: true, strictSeparator: true })
-      .withMessage("Provide startsAt as an ISO date/time")
-      .bail()
-      .custom(hasExplicitTimezone)
-      .withMessage("Provide a timezone for startsAt")
+// router.post(
+//   "/",
+//   requireAuth,
+//   allowRoles("admin"),
+//   [
+//     body("startsAt")
+//       .isISO8601({ strict: true, strictSeparator: true })
+//       .withMessage("Provide startsAt as an ISO date/time")
+//       .bail()
+//       .custom(hasExplicitTimezone)
+//       .withMessage("Provide a timezone for startsAt")
   ],
   async (req, res, next) => {
     const errors = validationResult(req);
